@@ -1,0 +1,6 @@
+// Por final temos Trumps, que no RSCSS também são chamados de Helpers.
+// Essa camada é a responsável pela maior especificidade de todas,
+// tendo seus componentes até com !important. A ideia dos trumps é que eles
+// sejam usados para classes reativas, comumente aquelas que queremos que
+// aconteça não importa o que aconteça, o clássico .hidden. Faz todo sentido
+// que para esses casos, o !important seja utilizado.

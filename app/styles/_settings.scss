@@ -1,0 +1,46 @@
+// Essas são as configurações básicas da sua arquitetura.
+// Em geral, são as variáveis globais que vão definir cores,
+// espaçamentos e outras configurações desejadas para o
+// funcionamento do seu framework em si.
+// Perceba que nada aqui será gerado como CSS final,
+// sendo somente utilizado na criação.
+//
+// Exemplo:
+// $color-ui: #BADA55;
+// $spacing-unit: 10px;
+
+$labeled-lanes-background: #f5f5f9;
+$lanes-toggle-icon: #9c9c9c;
+
+$lane-background: #e3e4f0;
+$lane-text: #9c9c9c;
+
+$card-background: #ffffff;
+$card-text: #4a4a4a;
+
+$accent: #5dabdc;
+
+
+
+$primary: #00BCD4;
+$primary-dark: darken($primary, 10%);
+$primary-light: lighten($primary, 20%);
+$accent-sec: #ec1c4b;
+$accent-ter: #f16a43;
+$accent-qua: #f7d969;
+
+$gray: #727272;
+$gray-dark: #5a5050;
+$gray-light: #D7D7DD;
+
+$white: #fff;
+$white-opacity: rgba(#fff, .54);
+
+$text: $gray-dark;
+$error: $accent-sec;
+
+// Media queries breakpoints
+$screen-phone: 480px;
+$screen-tablet: 768px;
+$screen-desktop: 992px;
+$screen-lg-desktop: 1200px;

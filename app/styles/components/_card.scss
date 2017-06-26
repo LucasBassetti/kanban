@@ -1,0 +1,26 @@
+
+.card {
+  background-color: $card-background;
+  border-radius: 2px;
+  color: $card-text;
+  cursor: move;
+  fill: $card-text;
+  margin: 12px 0;
+  padding: 3px 12px;
+  position: relative;
+
+  &.dragging {
+    background-color: darken($lane-background, 10%);
+    color: darken($lane-background, 10%);
+    fill: darken($lane-background, 10%);
+  }
+
+  .more-options {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 9px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

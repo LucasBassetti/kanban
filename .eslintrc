@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+  "globals": {
+    "document": true,
+    "localStorage": true,
+    "location": true,
+    "window": true,
+  },
+  "rules": {
+    "no-unused-expressions": ["off"],
+    "no-confusing-arrow": ["off"],
+    "class-methods-use-this": ["off"],
+    "import/prefer-default-export": ["off"],
+    "jsx-a11y/no-static-element-interactions": ["off"],
+    "react/forbid-prop-types": ["off"],
+    "react/react-in-jsx-scope": ["off"],
+    "react/jsx-boolean-value": ["off"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+  }
+}
