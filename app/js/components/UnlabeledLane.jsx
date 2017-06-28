@@ -18,7 +18,7 @@ class UnlabeledLane extends Component {
 
     return (
       <div className="options">
-        <span className="name"> {lane.name} </span>
+        <span className="label"> {lane.name} </span>
       </div>
     );
   }

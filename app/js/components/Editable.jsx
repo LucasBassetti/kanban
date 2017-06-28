@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import DropdownMenu from 'react-dd-menu';
 import { MoreVert } from './icons';
 
-export default class Editable extends Component {
+class Editable extends Component {
   constructor() {
     super();
 
     this.state = {
       isMenuOpen: false,
+      editing: true,
     };
 
     this.handleDelete = this.handleDelete.bind(this);
@@ -21,7 +22,7 @@ export default class Editable extends Component {
   }
 
   handleValueClick() {
-    this.props.onValueClick(this.props.id);
+    this.setState({ editing: true });
   }
 
   handleFinishEdit(e) {
@@ -33,6 +34,7 @@ export default class Editable extends Component {
 
     if (this.props.onEdit && value.trim().length) {
       this.props.onEdit(this.props.id, value);
+      this.setState({ editing: false });
     }
   }
 
@@ -68,7 +70,9 @@ export default class Editable extends Component {
         className="more-options"
         {...menuOptions}
       >
-        <li><a onClick={this.handleDelete}>Delete</a></li>
+        <li>
+          <a className="delete" onClick={this.handleDelete}>Delete</a>
+        </li>
       </DropdownMenu>
     );
   }
@@ -85,27 +89,27 @@ export default class Editable extends Component {
   }
 
   render() {
-    const { editing } = this.props;
+    const { editing } = this.state;
 
     return (
       <span>
         { editing ? this.renderEdit() : this.renderValue() }
-        { this.props.onDelete ? this.renderOptions() : null }
+        { this.renderOptions() }
       </span>
     );
   }
 }
 
 Editable.propTypes = {
-  editing: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  onDelete: PropTypes.func,
   onEdit: PropTypes.func.isRequired,
-  onValueClick: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  value: PropTypes.string,
 };
 
 Editable.defaultProps = {
   editing: undefined,
-  onDelete: undefined,
+  value: undefined,
 };
+
+export default Editable;

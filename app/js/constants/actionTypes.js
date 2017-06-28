@@ -1,3 +1,6 @@
+export const LOAD_LABELS = 'LOAD_LABELS';
+
+export const LOAD_LANES = 'LOAD_LANES';
 export const CREATE_LANE = 'CREATE_LANE';
 export const UPDATE_LANE = 'UPDATE_LANE';
 export const DELETE_LANE = 'DELETE_LANE';

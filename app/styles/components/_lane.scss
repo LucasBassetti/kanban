@@ -43,11 +43,25 @@
       width: 18px;
     }
 
-    > .name {
-      transition: all .3s ease;
-      transform-origin: left top;
+    > .label {
       font-size: 14px;
       font-weight: 400;
+      transition: all .3s ease;
+      transform-origin: left top;
+
+      .select {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        cursor: pointer;
+        outline: none;
+        text-align-last: center;
+        -webkit-appearance: none;
+
+        &:disabled {
+          cursor: default;
+        }
+      }
     }
 
     > .more-options {
@@ -64,7 +78,7 @@
     .options {
       flex-direction: column;
 
-      > .name  {
+      > .label  {
         transform-origin: left top;
         transform: rotate(90deg) translate(16px, -18px);
         white-space: nowrap;
@@ -80,4 +94,8 @@
       display: none;
     }
   }
+}
+
+.new-lane {
+  cursor: default;
 }

@@ -4,17 +4,27 @@ import {
   CREATE_LANE,
   DELETE_LANE,
   DETACH_FROM_LANE,
+  LOAD_LANES,
   MOVE_LANE,
   MOVE_CARD,
   UPDATE_LANE,
 } from '../constants/actionTypes';
+import { getLanes } from '../services/lanes';
 
-function createLane(name) {
+function loadLanes() {
+  return {
+    type: LOAD_LANES,
+    payload: getLanes(),
+  };
+}
+
+function createLane(labelId) {
   return {
     type: CREATE_LANE,
     payload: {
       id: uuid.v4(),
-      name,
+      labelId,
+      collapsed: true,
       cards: [],
     },
   };
@@ -67,6 +77,7 @@ function move(target, sourceId, targetId) {
 }
 
 export default {
+  loadLanes,
   createLane,
   updateLane,
   deleteLane,

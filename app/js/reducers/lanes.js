@@ -1,42 +1,45 @@
-import uuid from 'uuid';
 import update from 'react-addons-update';
 import {
   ATTACH_TO_LANE,
   CREATE_LANE,
   DELETE_LANE,
   DETACH_FROM_LANE,
+  LOAD_LANES,
   MOVE_LANE,
   MOVE_CARD,
   UPDATE_LANE,
 } from '../constants/actionTypes';
 
 const defaultState = [
-  {
-    id: uuid.v4(),
-    name: 'Unlabeled',
-    cards: [],
-  },
-  {
-    id: uuid.v4(),
-    name: 'Todo',
-    cards: [],
-  },
-  {
-    id: uuid.v4(),
-    name: 'In Progress',
-    cards: [],
-  },
-  {
-    id: uuid.v4(),
-    name: 'Review',
-    cards: [],
-  },
+  // {
+  //   id: uuid.v4(),
+  //   name: 'Unlabeled',
+  //   cards: [],
+  // },
+  // {
+  //   id: uuid.v4(),
+  //   name: 'Todo',
+  //   cards: [],
+  // },
+  // {
+  //   id: uuid.v4(),
+  //   name: 'In Progress',
+  //   cards: [],
+  // },
+  // {
+  //   id: uuid.v4(),
+  //   name: 'Review',
+  //   cards: [],
+  // },
 ];
 
-const lanes = (state = defaultState, action) => {
+const lanesReducer = (state = defaultState, action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case LOAD_LANES:
+      return payload;
+
     case CREATE_LANE:
       return state.concat(payload);
 
@@ -160,4 +163,4 @@ const lanes = (state = defaultState, action) => {
   }
 };
 
-export default lanes;
+export default lanesReducer;

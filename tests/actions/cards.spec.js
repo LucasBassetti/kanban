@@ -19,11 +19,7 @@ describe('cards actions', () => {
     expect(actions.createCard(text).payload.text).to.equal(expectedAction.payload.text);
   });
 
-  it('should check if id is v4 valid and create an update action', () => {
-    // const invalidId = {
-    //   id: 'Hello',
-    // };
-    // const invalidCard = 'not an object';
+  it('should create an update action', () => {
     const validId = uuid.v4();
     const validCard = {
       id: validId,
@@ -34,13 +30,10 @@ describe('cards actions', () => {
       payload: validCard,
     };
 
-    // expect(actions.updateCard.bind(null, invalidId)).to.throw(Error);
-    // expect(actions.updateCard.bind(null, invalidCard)).to.throw(Error);
     expect(actions.updateCard(validCard)).to.deep.equal(expectedAction);
   });
 
-  it('should check if id is v4 valid and create a delete action', () => {
-    // const invalidId = 'Hello';
+  it('should create a delete action', () => {
     const validId = uuid.v4();
     const expectedAction = {
       type: actionTypes.DELETE_CARD,
@@ -49,7 +42,6 @@ describe('cards actions', () => {
       },
     };
 
-    // expect(actions.deleteCard.bind(null, invalidId)).to.throw(Error);
     expect(actions.deleteCard(validId)).to.deep.equal(expectedAction);
   });
 });

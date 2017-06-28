@@ -10,7 +10,6 @@ function createCard(text) {
     type: CREATE_CARD,
     payload: {
       id: uuid.v4(),
-      editing: false,
       text,
     },
   };

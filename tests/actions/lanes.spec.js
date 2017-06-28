@@ -6,19 +6,19 @@ import * as actionTypes from '../../app/js/constants/actionTypes';
 
 describe('lanes actions', () => {
   it('should return an action to create a lane', () => {
-    const name = 'Active';
+    const labelId = '123';
     const expectedAction = {
       type: actionTypes.CREATE_LANE,
       payload: {
         id: uuid(),
-        name,
+        labelId,
       },
     };
 
-    expect(actions.createLane(name).type).to.equal(expectedAction.type);
-    expect(actions.createLane(name).payload.id).to.be.a('string');
-    expect(actions.createLane(name).payload.name).to.equal(expectedAction.payload.name);
-    expect(actions.createLane(name).payload.cards).to.be.an('array');
+    expect(actions.createLane(labelId).type).to.equal(expectedAction.type);
+    expect(actions.createLane(labelId).payload.id).to.be.a('string');
+    expect(actions.createLane(labelId).payload.labelId).to.equal(expectedAction.payload.labelId);
+    expect(actions.createLane(labelId).payload.cards).to.be.an('array');
   });
 
   it('should return an action to attach a card to a lane', () => {
@@ -38,13 +38,13 @@ describe('lanes actions', () => {
     const validId = uuid.v4();
     const updatedLane = {
       id: validId,
-      name: 'Text',
+      labelId: '123',
     };
     const expectedAction = {
       type: actionTypes.UPDATE_LANE,
       payload: {
         id: validId,
-        name: 'Text',
+        labelId: '123',
       },
     };
 

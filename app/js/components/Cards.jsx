@@ -24,7 +24,6 @@ class Cards extends Component {
           value={card.text}
           onDelete={this.props.onDeleteCard}
           onEdit={this.props.onEditCard}
-          onValueClick={this.props.onValueClick}
         />
       </Card>
     );
@@ -46,7 +45,6 @@ Cards.propTypes = {
   onDeleteCard: PropTypes.func.isRequired,
   onEditCard: PropTypes.func.isRequired,
   onMoveCard: PropTypes.func.isRequired,
-  onValueClick: PropTypes.func.isRequired,
 };
 
 export default Cards;

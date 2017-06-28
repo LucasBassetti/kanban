@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DropdownMenu from 'react-dd-menu';
 import Cards from './Cards';
-import { Add, MoreVert, Remove } from './icons';
+import LaneHeader from './LaneHeader';
 
 class Lane extends Component {
   constructor() {
     super();
 
     this.state = {
-      collapsed: false,
       isMenuOpen: false,
     };
 
     this.handleCreateCard = this.handleCreateCard.bind(this);
-    this.handleDeleteLane = this.handleDeleteLane.bind(this);
     this.handleDeleteCard = this.handleDeleteCard.bind(this);
   }
 
@@ -22,52 +19,26 @@ class Lane extends Component {
     this.props.onCreateCard(this.props.lane.id);
   }
 
-  handleDeleteLane() {
-    const lane = this.props.lane;
-    this.props.onDeleteLane(lane.id);
-    lane.cards.forEach(cardId => this.props.onDeleteCard(null, cardId));
-  }
-
   handleDeleteCard(cardId) {
     this.props.onDeleteCard(this.props.lane.id, cardId);
   }
 
-  renderOptions() {
-    const { collapsed, isMenuOpen } = this.state;
-    const { lane } = this.props;
-
-    const menuOptions = {
-      isOpen: isMenuOpen,
-      close: () => this.setState({ isMenuOpen: false }),
-      toggle: (
-        <a onClick={() => this.setState({ isMenuOpen: !isMenuOpen })}>
-          <MoreVert size={20} />
-        </a>
-      ),
-      align: 'right',
-    };
+  renderHeader() {
+    const { lane, label, labels } = this.props;
 
     return (
-      <div className="options">
-        <a
-          className="toggle"
-          onClick={() => this.setState({ collapsed: !collapsed })}
-        >
-          { collapsed ? <Add size={14} /> : <Remove size={14} /> }
-        </a>
-        <span className="name"> {lane.name} </span>
-        <DropdownMenu
-          className="more-options"
-          {...menuOptions}
-        >
-          <li><a>Delete</a></li>
-        </DropdownMenu>
-      </div>
+      <LaneHeader
+        label={label}
+        labels={labels}
+        lane={lane}
+        onDeleteCard={this.props.onDeleteLane}
+        onDeleteLane={this.props.onDeleteLane}
+        onEditLane={this.props.onEditLane}
+      />
     );
   }
 
   render() {
-    const { collapsed } = this.state;
     const {
       lane,
       allCards,
@@ -81,15 +52,14 @@ class Lane extends Component {
 
     const dragSource = connectDragSource(
       <div
-        className={collapsed ? 'lane collapsed' : 'lane'}
+        className={lane.collapsed ? 'lane collapsed' : 'lane'}
         style={{ opacity: isOver ? 0.8 : 1 }}
       >
-        { this.renderOptions() }
+        { this.renderHeader() }
         <Cards
           cards={laneCards}
           onDeleteCard={this.handleDeleteCard}
           onEditCard={this.props.onEditCard}
-          onValueClick={this.props.onEditCard}
           onMoveCard={this.props.onMoveCard}
         />
         <a
@@ -106,15 +76,18 @@ class Lane extends Component {
 }
 
 Lane.propTypes = {
+  label: PropTypes.object.isRequired,
+  labels: PropTypes.array.isRequired,
   allCards: PropTypes.array.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
   lane: PropTypes.object.isRequired,
   onCreateCard: PropTypes.func.isRequired,
-  onDeleteLane: PropTypes.func.isRequired,
   onDeleteCard: PropTypes.func.isRequired,
+  onDeleteLane: PropTypes.func.isRequired,
   onEditCard: PropTypes.func.isRequired,
+  onEditLane: PropTypes.func.isRequired,
   onMoveCard: PropTypes.func.isRequired,
 };
 

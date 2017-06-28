@@ -52,8 +52,6 @@ const mapDispatchToProps = dispatch => ({
     const newCard = cardsActions.createCard('New card');
     dispatch(newCard);
     dispatch(lanesActions.attachToLane(laneId, newCard.payload.id));
-
-    this.onEditCard(newCard.payload.id);
   },
 
   // Used both to detach a card from a lane and delete all the cards when a
@@ -73,9 +71,6 @@ const mapDispatchToProps = dispatch => ({
 
     if (value) {
       updatedCard.text = value;
-      updatedCard.editing = false;
-    } else {
-      updatedCard.editing = true;
     }
 
     dispatch(cardsActions.updateCard(updatedCard));

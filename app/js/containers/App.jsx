@@ -3,28 +3,33 @@ import PropTypes from 'prop-types';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import { connect } from 'react-redux';
+import labelsActions from '../actions/labels';
 import lanesActions from '../actions/lanes';
 import Lanes from '../components/Lanes';
 
 class App extends Component {
+  componentWillMount() {
+    this.props.onLoadLabels();
+    this.props.onLoadLanes();
+  }
+
   render() {
+    const { labels, lanes } = this.props;
+
+    if (lanes.length === 0) {
+      return (
+        <div className="loading">
+          Loading...
+        </div>
+      );
+    }
+
     return (
-      <div className="react-kanban">
-        {/* <h1 className="app-title">React.js Kanban</h1>
-        <button
-          className="add-lane"
-          onClick={this.props.onCreateLane}
-        >
-          + Lane
-        </button>
-        <button
-          className="reset-store"
-          onClick={this.props.onReset}
-        >
-          Reset persisted store
-        </button> */}
+      <div className="kanban">
         <Lanes
-          lanes={this.props.lanes}
+          labels={labels}
+          lanes={lanes}
+          onCreateLane={this.props.onCreateLane}
           onEditLane={this.props.onEditLane}
           onDeleteLane={this.props.onDeleteLane}
           onMoveLane={this.props.onMoveLane}
@@ -35,36 +40,37 @@ class App extends Component {
 }
 
 App.propTypes = {
+  labels: PropTypes.array.isRequired,
   lanes: PropTypes.array.isRequired,
+  onLoadLabels: PropTypes.func.isRequired,
+  onLoadLanes: PropTypes.func.isRequired,
   onCreateLane: PropTypes.func.isRequired,
   onDeleteLane: PropTypes.func.isRequired,
   onEditLane: PropTypes.func.isRequired,
   onMoveLane: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  lanes: state.lanes,
+const mapStateToProps = ({ labels, lanes }) => ({
+  labels,
+  lanes,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCreateLane() {
-    dispatch(lanesActions.createLane('Active'));
+  onLoadLabels() {
+    dispatch(labelsActions.loadLabels());
   },
 
-  onEditLane(laneId, name) {
-    const updatedLane = {
-      id: laneId,
-    };
+  onLoadLanes() {
+    dispatch(lanesActions.loadLanes());
+  },
 
-    if (name) {
-      updatedLane.name = name;
-      updatedLane.editing = false;
-    } else {
-      updatedLane.editing = true;
-    }
+  onCreateLane(labelId) {
+    const lane = dispatch(lanesActions.createLane(labelId)).payload;
+    return lane;
+  },
 
-    dispatch(lanesActions.updateLane(updatedLane));
+  onEditLane(lane) {
+    dispatch(lanesActions.updateLane(lane));
   },
 
   onDeleteLane(laneId) {
