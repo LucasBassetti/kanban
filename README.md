@@ -1,14 +1,12 @@
-# Movie Collection
-
-<a href="https://travis-ci.org/LucasBassetti/movie-collection"><img src="https://travis-ci.org/LucasBassetti/movie-collection.svg?branch=master" alt="Travis CI" /></a> <a href='https://coveralls.io/github/LucasBassetti/movie-collection?branch=master'><img src='https://coveralls.io/repos/github/LucasBassetti/movie-collection/badge.svg?branch=master' alt='Coverage Status' /></a>
+# KanBan
 
 ## Getting Start
 
 Run the following commands in your terminal
 
 ```bash
-git clone https://github.com/LucasBassetti/movie-collection.git
-cd movie-collection
+git clone https://github.com/LucasBassetti/kanban.git
+cd kanban
 npm install
 npm start
 ```

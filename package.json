@@ -1,7 +1,7 @@
 {
   "name": "kanban",
   "version": "0.0.1",
-  "description": "KanBan",
+  "description": "React KanBan",
   "scripts": {
     "precommit": "npm test && npm run build",
     "start": "./node_modules/.bin/webpack-dev-server --inline --content-base build/ -d",
