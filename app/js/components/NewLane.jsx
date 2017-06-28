@@ -42,6 +42,7 @@ class Lane extends Component {
 }
 
 Lane.propTypes = {
+  label: PropTypes.object.isRequired,
   onCreateLane: PropTypes.func.isRequired,
   onEditLane: PropTypes.func.isRequired,
 };

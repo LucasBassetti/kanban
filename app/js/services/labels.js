@@ -10,9 +10,10 @@ const labels = [
 const getLabels = () => new Promise((resolve) => {
   setTimeout(() => {
     resolve(labels);
-  }, 100);
+  }, 1000);
 });
 
 export {
+  labels,
   getLabels,
 };

@@ -24,8 +24,9 @@ const laneTarget = {
     const sourceProps = monitor.getItem();
     const sourceId = sourceProps.id;
     const sourceType = monitor.getItemType();
+    const labelId = targetProps.lane.labelId;
     if ((!targetProps.lane.cards.length) && sourceType === itemTypes.CARD) {
-      targetProps.attachToLane(targetId, sourceId);
+      targetProps.attachToLane(targetId, sourceId, labelId);
     } else if ((targetId !== sourceId) && (sourceType === itemTypes.LANE)) {
       targetProps.onMoveLane(sourceId, targetId);
     }
@@ -48,8 +49,12 @@ const mapStateToProps = ({ cards }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCreateCard(laneId) {
-    const newCard = cardsActions.createCard('New card');
+  onLoadCards(laneId) {
+    dispatch(lanesActions.loadCards(laneId));
+  },
+
+  onCreateCard(laneId, labelId) {
+    const newCard = cardsActions.createCard('New Card', labelId);
     dispatch(newCard);
     dispatch(lanesActions.attachToLane(laneId, newCard.payload.id));
   },
@@ -77,10 +82,17 @@ const mapDispatchToProps = dispatch => ({
   },
 
   onMoveCard(sourceId, targetId) {
+    dispatch(cardsActions.updateCardLabel(sourceId, targetId));
     dispatch(lanesActions.move('card', sourceId, targetId));
   },
 
-  attachToLane(laneId, cardId) {
+  attachToLane(laneId, cardId, labelId) {
+    const updatedCard = {
+      id: cardId,
+      labelId,
+    };
+
+    dispatch(cardsActions.updateCard(updatedCard));
     dispatch(lanesActions.attachToLane(laneId, cardId));
   },
 });

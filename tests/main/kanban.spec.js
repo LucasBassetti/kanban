@@ -1,19 +1,20 @@
 import React from 'react';
 import uuid from 'uuid';
-import { describe, it, after } from 'mocha';
+import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import App from '../../app/js/containers/App';
+import Kanban from '../../app/js/containers/Kanban';
 import UnlabeledLane from '../../app/js/containers/UnlabeledLane';
 import Lane from '../../app/js/containers/Lane';
-import Card from '../../app/js/containers/Card';
+import Cards from '../../app/js/components/placeholders/Cards';
 
 const mockStore = configureStore();
 const card = {
   id: uuid.v4(),
-  name: 'Card 1',
+  text: 'Card 1',
+  labelId: '1',
 };
 const lanes = [
   {
@@ -38,25 +39,24 @@ const labels = [
   { id: '3', value: 'Drafts' },
 ];
 const cards = [card];
+const loaded = true;
+
 const store = mockStore({
   labels,
   lanes,
   cards,
+  loaded,
 });
 
-describe('App', () => {
+describe('Kanban', () => {
   const wrapper = mount(
     <Provider store={store}>
-      <App />
+      <Kanban />
     </Provider>,
   );
 
-  after(() => {
-    wrapper.unmount();
-  });
-
   it('should render', () => {
-    expect(wrapper.find(App)).to.exist;
+    expect(wrapper.find(Kanban)).to.exist;
   });
 
   it('should render 1 UnlabeledLane', () => {
@@ -67,7 +67,7 @@ describe('App', () => {
     expect(wrapper.find(Lane).length).to.be.equal(2);
   });
 
-  it('should render 1 Card', () => {
-    expect(wrapper.find(Card).length).to.be.equal(1);
+  it('should render the placeholders Cards', () => {
+    expect(wrapper.find(Cards).length).to.be.equal(2);
   });
 });

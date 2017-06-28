@@ -4,12 +4,12 @@ import DropdownMenu from 'react-dd-menu';
 import { MoreVert } from './icons';
 
 class Editable extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       isMenuOpen: false,
-      editing: true,
+      editing: props.editing || false,
     };
 
     this.handleDelete = this.handleDelete.bind(this);
@@ -101,6 +101,7 @@ class Editable extends Component {
 }
 
 Editable.propTypes = {
+  editing: PropTypes.bool,
   id: PropTypes.string.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

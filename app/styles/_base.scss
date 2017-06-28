@@ -13,7 +13,7 @@
 }
 
 body {
-  color: $text;
+  // color: $text;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -41,25 +41,6 @@ h2 {
 
 h2 {
   font-size: 1.2em;
-}
-
-img {
-  max-width: 100%;
-}
-
-button {
-  background-color: $gray;
-  border: 0;
-  border-radius: 2px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
-  color: #fff;
-  padding: .5em 1em;
-  transition: all .3s ease-out;
-}
-
-button:focus {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
-  outline: 0;
 }
 
 input {

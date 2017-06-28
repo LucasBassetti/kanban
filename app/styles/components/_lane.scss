@@ -59,6 +59,7 @@
         -webkit-appearance: none;
 
         &:disabled {
+          text-align-last: left;
           cursor: default;
         }
       }

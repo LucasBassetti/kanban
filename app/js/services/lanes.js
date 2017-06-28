@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 
-const lanes = [
+let lanes = [
   {
     id: uuid.v4(),
     name: 'Unlabeled',
@@ -31,12 +31,17 @@ const lanes = [
   },
 ];
 
-const getLanes = () => new Promise((resolve) => {
+const loadAllLanes = () => new Promise((resolve) => {
   setTimeout(() => {
     resolve(lanes);
   }, 100);
 });
 
+const updateLanes = (updatedLanes) => {
+  lanes = JSON.parse(JSON.stringify(updatedLanes));
+};
+
 export {
-  getLanes,
+  loadAllLanes,
+  updateLanes,
 };

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Cards from './Cards';
+import PlaceholderCards from './placeholders/Cards';
 import LaneHeader from './LaneHeader';
+import API from '../services';
 
 class Lane extends Component {
   constructor() {
@@ -9,14 +11,33 @@ class Lane extends Component {
 
     this.state = {
       isMenuOpen: false,
+      loading: true,
     };
 
     this.handleCreateCard = this.handleCreateCard.bind(this);
     this.handleDeleteCard = this.handleDeleteCard.bind(this);
+    this.handleLoadCards = this.handleLoadCards.bind(this);
+  }
+
+  componentWillMount() {
+    this.handleLoadCards();
+  }
+
+  handleLoadCards(labelId) {
+    const { lane } = this.props;
+    this.setState({ loading: true }, () => {
+      API.getCards(labelId || lane.labelId).then((cards) => {
+        lane.labelId = labelId || lane.labelId;
+        lane.cards = cards;
+        this.props.onEditLane(lane);
+        this.setState({ loading: false });
+      });
+    });
   }
 
   handleCreateCard() {
-    this.props.onCreateCard(this.props.lane.id);
+    const { lane } = this.props;
+    this.props.onCreateCard(lane.id, lane.labelId);
   }
 
   handleDeleteCard(cardId) {
@@ -31,6 +52,7 @@ class Lane extends Component {
         label={label}
         labels={labels}
         lane={lane}
+        onLoadCards={this.handleLoadCards}
         onDeleteCard={this.props.onDeleteLane}
         onDeleteLane={this.props.onDeleteLane}
         onEditLane={this.props.onEditLane}
@@ -39,6 +61,7 @@ class Lane extends Component {
   }
 
   render() {
+    const { loading } = this.state;
     const {
       lane,
       allCards,
@@ -56,12 +79,18 @@ class Lane extends Component {
         style={{ opacity: isOver ? 0.8 : 1 }}
       >
         { this.renderHeader() }
-        <Cards
-          cards={laneCards}
-          onDeleteCard={this.handleDeleteCard}
-          onEditCard={this.props.onEditCard}
-          onMoveCard={this.props.onMoveCard}
-        />
+        {
+          loading ? (
+            <PlaceholderCards />
+          ) : (
+            <Cards
+              cards={laneCards}
+              onDeleteCard={this.handleDeleteCard}
+              onEditCard={this.props.onEditCard}
+              onMoveCard={this.props.onMoveCard}
+            />
+          )
+        }
         <a
           className="add-card"
           onClick={this.handleCreateCard}

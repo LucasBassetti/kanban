@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Cards from './Cards';
+import API from '../services';
 
 class UnlabeledLane extends Component {
   constructor() {
     super();
 
     this.handleDeleteCard = this.handleDeleteCard.bind(this);
+    this.handleLoadCards = this.handleLoadCards.bind(this);
+  }
+
+  componentWillMount() {
+    this.handleLoadCards();
+  }
+
+  handleLoadCards() {
+    const { lane } = this.props;
+    API.getUnlabeledCards(lane.labelId).then((cards) => {
+      lane.cards = cards;
+      this.props.onEditLane(lane);
+    });
   }
 
   handleDeleteCard(cardId) {
@@ -59,6 +73,7 @@ UnlabeledLane.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
   lane: PropTypes.object.isRequired,
+  onEditLane: PropTypes.func.isRequired,
   onDeleteCard: PropTypes.func.isRequired,
   onEditCard: PropTypes.func.isRequired,
   onMoveCard: PropTypes.func.isRequired,

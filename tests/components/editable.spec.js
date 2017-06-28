@@ -29,13 +29,13 @@ describe('Editable', () => {
     expect(wrapper.find(Editable)).to.exist;
   });
 
-  it('should autoFocus input', () => {
-    expect(wrapper.find('input').props().autoFocus).to.be.equal(true);
+  it('should input be read only', () => {
+    expect(wrapper.find('input').props().readOnly).to.be.equal(true);
   });
 
-  it('should set input as readOnly', () => {
-    wrapper.setState({ editing: false });
-    expect(wrapper.find('input').props().readOnly).to.be.equal(true);
+  it('should focus input', () => {
+    wrapper.setState({ editing: true });
+    expect(wrapper.find('input').props().autoFocus).to.be.equal(true);
   });
 
   it('should render New Card text in the input', () => {

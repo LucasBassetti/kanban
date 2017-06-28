@@ -10,28 +10,7 @@ import {
   UPDATE_LANE,
 } from '../constants/actionTypes';
 
-const defaultState = [
-  // {
-  //   id: uuid.v4(),
-  //   name: 'Unlabeled',
-  //   cards: [],
-  // },
-  // {
-  //   id: uuid.v4(),
-  //   name: 'Todo',
-  //   cards: [],
-  // },
-  // {
-  //   id: uuid.v4(),
-  //   name: 'In Progress',
-  //   cards: [],
-  // },
-  // {
-  //   id: uuid.v4(),
-  //   name: 'Review',
-  //   cards: [],
-  // },
-];
+const defaultState = [];
 
 const lanesReducer = (state = defaultState, action) => {
   const { type, payload } = action;

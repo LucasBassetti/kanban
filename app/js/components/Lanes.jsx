@@ -23,6 +23,7 @@ class Lanes extends Component {
       <UnlabeledLane
         key={lane.id}
         lane={lane}
+        onEditLane={this.props.onEditLane}
       />
     );
   }

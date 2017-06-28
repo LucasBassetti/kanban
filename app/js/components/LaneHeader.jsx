@@ -12,12 +12,18 @@ class Lane extends Component {
     };
 
     this.handleDeleteLane = this.handleDeleteLane.bind(this);
+    this.handleLoadCards = this.handleLoadCards.bind(this);
   }
 
   handleDeleteLane() {
     const lane = this.props.lane;
     this.props.onDeleteLane(lane.id);
     lane.cards.forEach(cardId => this.props.onDeleteCard(null, cardId));
+  }
+
+  handleLoadCards(event) {
+    const labelId = event.target.value;
+    this.props.onLoadCards(labelId);
   }
 
   toggleLane() {
@@ -68,6 +74,7 @@ class Lane extends Component {
             className="select"
             defaultValue={label.id}
             disabled={lane.collapsed}
+            onChange={this.handleLoadCards}
           >
             { options }
           </select>
@@ -91,6 +98,7 @@ Lane.propTypes = {
   label: PropTypes.object.isRequired,
   labels: PropTypes.array.isRequired,
   lane: PropTypes.object.isRequired,
+  onLoadCards: PropTypes.func.isRequired,
   onDeleteCard: PropTypes.func.isRequired,
   onDeleteLane: PropTypes.func.isRequired,
   onEditLane: PropTypes.func.isRequired,

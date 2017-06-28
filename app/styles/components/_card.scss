@@ -6,8 +6,13 @@
   cursor: move;
   fill: $card-text;
   margin: 12px 0;
+  min-height: 36px;
   padding: 3px 12px;
   position: relative;
+
+  &.placeholder {
+    animation: toggleOpacity 1s linear infinite alternate;
+  }
 
   &.dragging {
     background-color: darken($lane-background, 10%);

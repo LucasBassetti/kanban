@@ -1,29 +1,3 @@
-.add-lane {
-  background-color: $primary;
-  margin-bottom: .4em;
-  margin-left: 3em;
-
-  &:hover,
-  &:focus {
-    background-color: $accent-ter;
-  }
-}
-
-.reset-store {
-  background-color: rgba($primary, 0);
-  box-shadow: none;
-  color: $gray;
-  font-weight: 600;
-  margin-bottom: .4em;
-  margin-left: 1em;
-
-  &:hover,
-  &:focus {
-    background-color: rgba($primary, 0);
-    color: $primary;
-  }
-}
-
 .lanes {
   background-color: $labeled-lanes-background;
   display: flex;

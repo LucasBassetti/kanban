@@ -8,3 +8,21 @@
 //     fotn-family: "UI font", sans-serif;
 //     font-weigth: 400;
 // }
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes toggleOpacity {
+  0% {
+    opacity: .3;
+  }
+  100% {
+    opacity: 1;
+  }
+}

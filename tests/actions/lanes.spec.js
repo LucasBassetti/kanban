@@ -12,13 +12,16 @@ describe('lanes actions', () => {
       payload: {
         id: uuid(),
         labelId,
+        collapsed: true,
       },
     };
+    const result = actions.createLane(labelId);
 
-    expect(actions.createLane(labelId).type).to.equal(expectedAction.type);
-    expect(actions.createLane(labelId).payload.id).to.be.a('string');
-    expect(actions.createLane(labelId).payload.labelId).to.equal(expectedAction.payload.labelId);
-    expect(actions.createLane(labelId).payload.cards).to.be.an('array');
+    expect(result.type).to.equal(expectedAction.type);
+    expect(result.payload.id).to.be.a('string');
+    expect(result.payload.labelId).to.equal(expectedAction.payload.labelId);
+    expect(result.payload.collapsed).to.equal(expectedAction.payload.collapsed);
+    expect(result.payload.cards).to.be.an('array');
   });
 
   it('should return an action to attach a card to a lane', () => {
@@ -88,10 +91,4 @@ describe('lanes actions', () => {
 
     expect(actions.move('card', validId, validId)).to.deep.equal(expectedAction);
   });
-
-  // it('should throw an error', () => {
-  //   expect(actions.createLane.bind(null, {})).to.throw(Error);
-  //   expect(actions.attachToLane.bind(null, 1, 'invalidId')).to.throw(Error);
-  //   expect(actions.detachFromLane.bind(null, 1, 'invalidId')).to.throw(Error);
-  // });
 });

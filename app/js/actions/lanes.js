@@ -9,12 +9,12 @@ import {
   MOVE_CARD,
   UPDATE_LANE,
 } from '../constants/actionTypes';
-import { getLanes } from '../services/lanes';
+import { loadAllLanes } from '../services/lanes';
 
 function loadLanes() {
   return {
     type: LOAD_LANES,
-    payload: getLanes(),
+    payload: loadAllLanes(),
   };
 }
 

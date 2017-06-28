@@ -6,17 +6,21 @@ import * as actionTypes from '../../app/js/constants/actionTypes';
 
 describe('cards actions', () => {
   it('should create an action to add a card', () => {
-    const text = 'Create task';
+    const text = 'New card';
+    const labelId = '1';
     const expectedAction = {
       type: actionTypes.CREATE_CARD,
       payload: {
         text,
+        labelId,
       },
     };
+    const result = actions.createCard(text, labelId);
 
-    expect(actions.createCard(text).type).to.equal(expectedAction.type);
-    expect(actions.createCard(text).payload.id).to.be.a('string');
-    expect(actions.createCard(text).payload.text).to.equal(expectedAction.payload.text);
+    expect(result.type).to.equal(expectedAction.type);
+    expect(result.payload.id).to.be.a('string');
+    expect(result.payload.text).to.equal(expectedAction.payload.text);
+    expect(result.payload.labelId).to.equal(expectedAction.payload.labelId);
   });
 
   it('should create an update action', () => {
