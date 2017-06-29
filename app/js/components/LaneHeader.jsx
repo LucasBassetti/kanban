@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DropdownMenu from 'react-dd-menu';
+import Dialog from './common/Dialog';
 import { Add, MoreVert, Remove } from './icons';
 
 class Lane extends Component {
@@ -9,6 +10,7 @@ class Lane extends Component {
 
     this.state = {
       isMenuOpen: false,
+      opened: false,
     };
 
     this.handleDeleteLane = this.handleDeleteLane.bind(this);
@@ -33,7 +35,7 @@ class Lane extends Component {
   }
 
   render() {
-    const { isMenuOpen } = this.state;
+    const { opened, isMenuOpen } = this.state;
     const { lane, label, labels } = this.props;
 
     const menuOptions = {
@@ -84,11 +86,18 @@ class Lane extends Component {
           {...menuOptions}
         >
           <li>
-            <a onClick={() => this.handleDeleteLane()}>
+            <a onClick={() => this.setState({ opened: true })}>
               Delete
             </a>
           </li>
         </DropdownMenu>
+        <Dialog
+          opened={opened}
+          title="Delete Lane"
+          message="Are you sure to delete this lane?"
+          onConfirm={() => this.handleDeleteLane()}
+          onCancel={() => this.setState({ opened: false })}
+        />
       </div>
     );
   }

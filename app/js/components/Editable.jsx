@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DropdownMenu from 'react-dd-menu';
+import Dialog from './common/Dialog';
 import { MoreVert } from './icons';
 
 class Editable extends Component {
@@ -9,6 +10,7 @@ class Editable extends Component {
 
     this.state = {
       isMenuOpen: false,
+      opened: false,
       editing: props.editing || false,
     };
 
@@ -52,7 +54,7 @@ class Editable extends Component {
   }
 
   renderOptions() {
-    const { isMenuOpen } = this.state;
+    const { opened, isMenuOpen } = this.state;
 
     const menuOptions = {
       isOpen: isMenuOpen,
@@ -66,14 +68,28 @@ class Editable extends Component {
     };
 
     return (
-      <DropdownMenu
-        className="more-options"
-        {...menuOptions}
-      >
-        <li>
-          <a className="delete" onClick={this.handleDelete}>Delete</a>
-        </li>
-      </DropdownMenu>
+      <div>
+        <DropdownMenu
+          className="more-options"
+          {...menuOptions}
+        >
+          <li>
+            <a
+              className="delete"
+              onClick={() => this.setState({ opened: true })}
+            >
+              Delete
+            </a>
+          </li>
+        </DropdownMenu>
+        <Dialog
+          opened={opened}
+          title="Delete Card"
+          message="Are you sure to delete this card?"
+          onConfirm={() => this.handleDelete()}
+          onCancel={() => this.setState({ opened: false })}
+        />
+      </div>
     );
   }
 

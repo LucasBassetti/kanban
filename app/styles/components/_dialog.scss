@@ -1,0 +1,52 @@
+.dialog-wrapper {
+  background: rgba(0, 0, 0, 0.4);
+  cursor: default;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+
+  &.opened {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.dialog {
+  animation: scale .3s ease;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #4a4a4a;
+  color: #4a4a4a;
+  min-width: 300px;
+  padding: 12px;
+
+  > .content {
+    padding: 16px 0;
+  }
+
+  > .footer {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+
+    .button {
+      cursor: pointer;
+      font-size: 14px;
+      padding: 6px;
+      text-transform: uppercase;
+
+      &.cancel {
+        color: #9a9a9a;
+
+        &:hover {
+          color: darken(#9a9a9a, 20%);
+        }
+      }
+    }
+  }
+}
